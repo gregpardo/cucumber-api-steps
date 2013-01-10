@@ -74,7 +74,7 @@ Then /^the response status should be "([^"]*)"$/ do |status|
   end
 end
 
-Then /^the JSON response should (not)?\s?have "([^"]*)" with the text "([^"]*)"$/ do |negative, json_path, text|
+Then /^the JSON response must (not)?\s?have "([^"]*)" with the text "([^"]*)"$/ do |negative, json_path, text|
   json    = JSON.parse(last_response.body)
   results = JsonPath.new(json_path).on(json).to_a.map(&:to_s)
   if self.respond_to?(:should)
@@ -92,7 +92,7 @@ Then /^the JSON response should (not)?\s?have "([^"]*)" with the text "([^"]*)"$
   end
 end
 
-Then /^the XML response should have "([^"]*)" with the text "([^"]*)"$/ do |xpath, text|
+Then /^the XML response must have "([^"]*)" with the text "([^"]*)"$/ do |xpath, text|
   parsed_response = Nokogiri::XML(last_response.body)
   elements = parsed_response.xpath(xpath)
   if self.respond_to?(:should)
